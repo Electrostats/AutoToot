@@ -57,6 +57,8 @@ public class Configuration
 
 		PerfectScore = configFile.Bind("Score", "PerfectScore", false,
 			"Cheat the score returned by notes to achieve a perfect score.");
+		GhostNoteDetection = configFile.Bind("Score", "GhostNoteDetection", false,
+			"Will instantly break combo when a ghost note is played. Make sure to turn off PerfectScore for this to work.");
 	}
 
 	public void Validate()
@@ -99,9 +101,10 @@ public class Configuration
 	public ConfigEntry<string> EaseFunction { get; }
 	public ConfigEntry<int> EarlyStart { get; }
 	public ConfigEntry<int> LateFinish { get; }
-	public ConfigEntry<bool> PerfectScore { get; }
+    public ConfigEntry<bool> PerfectScore { get; }
+    public ConfigEntry<bool> GhostNoteDetection { get; }
 
-	private const KeyCode DefaultToggleKey = KeyCode.F8;
+    private const KeyCode DefaultToggleKey = KeyCode.F8;
 	private const string DefaultEasingFunction = "Linear";
 	private const int DefaultEarlyStart = 8;
 	private const int DefaultLateFinish = 8;

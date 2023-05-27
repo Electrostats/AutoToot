@@ -42,6 +42,7 @@ public class Bot
 {
     public bool isTooting = false;
     public bool shouldPlayPerfect;
+    public bool shouldDetectGhostNotes;
 
     public Bot(GameController gameController)
     {
@@ -65,6 +66,7 @@ public class Bot
         _lateFinish = Plugin.Configuration.LateFinish.Value;
         _easeFunction = typeof(Easing).GetMethod(Plugin.Configuration.EaseFunction.Value);
         shouldPlayPerfect = Plugin.Configuration.PerfectScore.Value;
+        shouldDetectGhostNotes = Plugin.Configuration.GhostNoteDetection.Value;
     }
 
     public void Update()
@@ -74,7 +76,7 @@ public class Bot
             float currentTime = GetTime();
 
 
-            if (_currentNoteEndTime >= _gameController.currentnotestart)
+            if (!shouldDetectGhostNotes && _currentNoteEndTime >= _gameController.currentnotestart)
                 _gameController.released_button_between_notes = true;
 
             _currentNoteStartTime = _gameController.currentnotestart - _earlyStart;
